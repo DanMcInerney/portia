@@ -9,8 +9,8 @@ from deps.smbexec import *
 from deps.secretsdump import *
 from deps.smb_exploit import *
 from deps.goldenPac import *
-from modules import ms08_067
-from modules import ms17_010
+from deps import ms08_067
+#from deps import ms17_010
 from random import randint
 #from deps.ms14_068 import *
 import nmap
@@ -5383,8 +5383,6 @@ if args.module=='keepass':
     os._exit(1)
 
 if args.module=="vuln":
-    from modules import ms08_067
-    from modules import ms17_010
     ms08_067List=[]
     for ip in nbList:
         tmpResultList=ms08_067.check(ip)
@@ -5396,17 +5394,17 @@ if args.module=="vuln":
                     if tmpIP not in ms08_067List:
                         ms08_067List.append(tmpIP)
                     #print (setColor("[+]", bold, color="green"))+" "+tmpIP+":445 | "+(setColor("[MS08-067]", color="green"))
-        result=ms17_010.check(ip)
-        if 'is likely VULNERABLE ' in result:
-            result=result.replace('[+] [','')
-            result=result.replace('(','')
-            result=result.replace(')','')
-            if ip not in ms08_067List:
-                result=result.replace('] is likely VULNERABLE to MS17-010!',':445 | '+(setColor("[MS17-010]", color="green")))
-            else:
-                result=result.replace('] is likely VULNERABLE to MS17-010!',':445 | '+(setColor("[MS08-067][MS17-010]", color="green")))                
-            print (setColor("[+] ", bold, color="green"))+result
-    os._exit(1)
+#        result=ms17_010.check(ip)
+#        if 'is likely VULNERABLE ' in result:
+#            result=result.replace('[+] [','')
+#            result=result.replace('(','')
+#            result=result.replace(')','')
+#            if ip not in ms08_067List:
+#                result=result.replace('] is likely VULNERABLE to MS17-010!',':445 | '+(setColor("[MS17-010]", color="green")))
+#            else:
+#                result=result.replace('] is likely VULNERABLE to MS17-010!',':445 | '+(setColor("[MS08-067][MS17-010]", color="green")))                
+#            print (setColor("[+] ", bold, color="green"))+result
+#    os._exit(1)
 
 if args.module=='mimikatz':
     tmpResultList=[]
